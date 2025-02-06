@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import LoadGameOverModal from "./gameovermodal"
 
 function getRandomInt(range){
     return Math.floor(Math.random() * range)
@@ -8,6 +9,7 @@ export default function LoadGrid() {
     const [clickedValues, setClickedValues] = useState([])
     const [lastClicked, setLastClicked] = useState(null)
     const [value, setValue] = useState([getRandomInt(100),getRandomInt(100),getRandomInt(100),getRandomInt(100)])
+    const [modalVisible, setModalVisible] = useState(false)
     const handleButtonClick = (valueClicked) => {
         setClickedValues(prevClickedValues => [...prevClickedValues, valueClicked])
         setLastClicked(valueClicked)
@@ -19,7 +21,10 @@ export default function LoadGrid() {
         //if last clicked in clickedvalues, modal displays saying you lost - use length of array for score
         let clickedValuesExcludingLast = clickedValues.slice(0, -1)
         console.log(clickedValuesExcludingLast.includes(lastClicked))
-    }, [handleButtonClick])
+        if(clickedValuesExcludingLast.includes(lastClicked)){
+            setModalVisible(true)
+        }
+    }, [clickedValues, lastClicked])
     return(
         <>
             <div className='number-grid'>
@@ -44,6 +49,7 @@ export default function LoadGrid() {
                     </button>
                 </div>
             </div>
+            {modalVisible && <LoadGameOverModal />}
         </>
     )
 }
