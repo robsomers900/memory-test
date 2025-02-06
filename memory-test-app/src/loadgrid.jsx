@@ -27,29 +27,37 @@ export default function LoadGrid() {
     }, [clickedValues, lastClicked])
     return(
         <>
-            <div className='number-grid'>
-                <div className='number-button-container'>
-                    <button className='number-button' onClick={() => handleButtonClick(value[0])}>
-                        {value[0]}
-                    </button>
-                </div>
-                <div className='number-button-container'>
-                    <button className='number-button' onClick={() => handleButtonClick(value[1])}>
-                        {value[1]}
-                    </button>
-                </div>
-                <div className='number-button-container'>
-                    <button className='number-button' onClick={() => handleButtonClick(value[2])}>
-                        {value[2]}
-                    </button>
-                </div>
-                <div className='number-button-container'>
-                    <button className='number-button' onClick={() => handleButtonClick(value[3])}>
-                        {value[3]}
-                    </button>
+            <div className="main-container">
+                <div className="scoreboard">Your score is {clickedValues.length}</div>
+                <div className='number-grid'>
+                    <div className='number-button-container'>
+                        <button className='number-button' onClick={() => handleButtonClick(value[0])}>
+                            {value[0]}
+                        </button>
+                    </div>
+                    <div className='number-button-container'>
+                        <button className='number-button' onClick={() => handleButtonClick(value[1])}>
+                            {value[1]}
+                        </button>
+                    </div>
+                    <div className='number-button-container'>
+                        <button className='number-button' onClick={() => handleButtonClick(value[2])}>
+                            {value[2]}
+                        </button>
+                    </div>
+                    <div className='number-button-container'>
+                        <button className='number-button' onClick={() => handleButtonClick(value[3])}>
+                            {value[3]}
+                        </button>
+                    </div>
                 </div>
             </div>
-            {modalVisible && <LoadGameOverModal />}
+            {modalVisible && <LoadGameOverModal value = {
+                <div>
+                    <div className="modal-title">Game Over</div>
+                    <div className="modal-score">Your score is {clickedValues.length}</div>
+                </div>
+            }/>}
         </>
     )
 }
